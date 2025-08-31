@@ -1,10 +1,10 @@
 const CONFIG = {
   // profile setting (required)
   profile: {
-    name: "shionpark",
-    image: "/avatar.svg", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
+    name: "Shion",
+    image: "/profile.png", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
     role: "frontend developer",
-    bio: "I develop everything using node.",
+    bio: "데이터로 더 나은 사용자 경험을 설계하는 프론트엔드 개발자",
     email: "seoy1108@gmail.com",
     linkedin: "shionpark",
     github: "shionpark",
@@ -68,7 +68,9 @@ const CONFIG = {
     },
   },
   isProd: process.env.VERCEL_ENV === "production", // distinguish between development and production environment (ref: https://vercel.com/docs/environment-variables#system-environment-variables)
-  revalidateTime: process.env.REVALIDATE_TIME ? parseInt(process.env.REVALIDATE_TIME, 10) : 21600 * 7, // revalidate time for [slug], index
+  revalidateTime: process.env.REVALIDATE_TIME
+    ? parseInt(process.env.REVALIDATE_TIME, 10)
+    : 21600 * 7, // revalidate time for [slug], index
 }
 
 module.exports = { CONFIG }
