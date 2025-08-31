@@ -19,6 +19,8 @@ const MobileProfileCard: React.FC<Props> = () => {
             height={90}
             css={{ position: "relative" }}
             alt="profile_image"
+            priority={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <div className="wrapper">
             <div className="top">{CONFIG.profile.name}</div>

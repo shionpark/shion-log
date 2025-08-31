@@ -25,8 +25,13 @@ const CategorySelect: React.FC<Props> = () => {
   }
   return (
     <StyledWrapper>
-      <div ref={dropdownRef} className="wrapper" onClick={handleOpen}>
-        {currentCategory} Posts <MdExpandMore />
+      <div
+        ref={dropdownRef}
+        className="wrapper"
+        // onClick={handleOpen}
+      >
+        {currentCategory} Posts
+        {/* <MdExpandMore /> */}
       </div>
       {opened && (
         <div className="content">
@@ -36,7 +41,8 @@ const CategorySelect: React.FC<Props> = () => {
               key={idx}
               onClick={() => handleOptionClick(key)}
             >
-              {`${key} (${data[key]})`}
+              {/* {`${key} (${data[key]})`} */}
+              {key}
             </div>
           ))}
         </div>
@@ -58,7 +64,7 @@ const StyledWrapper = styled.div`
     font-size: 1.25rem;
     line-height: 1.75rem;
     font-weight: 700;
-    cursor: pointer;
+    // cursor: pointer;
   }
   > .content {
     position: absolute;

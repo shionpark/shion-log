@@ -11,6 +11,7 @@ import ServiceCard from "./ServiceCard"
 import ContactCard from "./ContactCard"
 import PostList from "./PostList"
 import PinnedPosts from "./PostList/PinnedPosts"
+import CategoryList from "./CategoryList"
 
 const HEADER_HEIGHT = 73
 
@@ -27,6 +28,7 @@ const Feed: React.FC<Props> = () => {
           height: `calc(100vh - ${HEADER_HEIGHT}px)`,
         }}
       >
+        <CategoryList />
         <TagList />
       </div>
       <div className="mid">
@@ -34,7 +36,8 @@ const Feed: React.FC<Props> = () => {
         <PinnedPosts q={q} />
         <SearchInput value={q} onChange={(e) => setQ(e.target.value)} />
         <div className="tags">
-          <TagList />
+          {/* <TagList /> */}
+          <CategoryList />
         </div>
         <FeedHeader />
         <PostList q={q} />
@@ -49,7 +52,8 @@ const Feed: React.FC<Props> = () => {
         }}
       >
         <ProfileCard />
-        <ServiceCard />
+        {/* <ServiceCard /> */}
+        {/* <TagList /> */}
         <ContactCard />
         <div className="footer">
           <Footer />

@@ -29,10 +29,15 @@ const PostCard: React.FC<Props> = ({ data }) => {
               fill
               alt={data.title}
               css={{ objectFit: "cover" }}
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         )}
-        <div data-thumb={!!data.thumbnail} data-category={!!category} className="content">
+        <div
+          data-thumb={!!data.thumbnail}
+          data-category={!!category}
+          className="content"
+        >
           <header className="top">
             <h2>{data.title}</h2>
           </header>
@@ -159,6 +164,15 @@ const StyledWrapper = styled(Link)`
       > .tags {
         display: flex;
         gap: 0.5rem;
+
+        overflow: scroll;
+        /* 스크롤바 숨기기 - 크로스 브라우징 대응 */
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE, Edge */
+
+        &::-webkit-scrollbar {
+          display: none; /* Chrome, Safari */
+        }
       }
     }
   }

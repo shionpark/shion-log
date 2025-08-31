@@ -12,11 +12,7 @@ const Tag: React.FC<Props> = ({ children }) => {
   const handleClick = (value: string) => {
     router.push(`/?tag=${value}`)
   }
-  return (
-    <StyledWrapper onClick={() => handleClick(children)}>
-      {children}
-    </StyledWrapper>
-  )
+  return <StyledWrapper>{children}</StyledWrapper>
 }
 
 export default Tag
@@ -33,4 +29,9 @@ const StyledWrapper = styled.div`
   color: ${({ theme }) => theme.colors.gray10};
   background-color: ${({ theme }) => theme.colors.gray5};
   cursor: pointer;
+
+  white-space: nowrap; // ✅ 줄바꿈 방지
+  // text-overflow: ellipsis; // ✅ 너무 길면 말줄임표
+  // overflow: hidden; // ✅ 넘치는 텍스트 숨김
+  // max-width: 100%; // ✅ 줄 바꿈 방지를 위한 안전망
 `

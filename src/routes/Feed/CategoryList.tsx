@@ -1,34 +1,31 @@
 import styled from "@emotion/styled"
 import { useRouter } from "next/router"
-import React, { useState } from "react"
+import React from "react"
 import { Emoji } from "src/components/Emoji"
-import { useTagsQuery } from "src/hooks/useTagsQuery"
+import { useCategoriesQuery } from "src/hooks/useCategoriesQuery"
 
 type Props = {}
 
-const TagList: React.FC<Props> = () => {
+const CategoryList: React.FC<Props> = () => {
   const router = useRouter()
-  const currentTag = router.query.tag || undefined
-  const data = useTagsQuery()
+  const currentCategory = router.query.category || undefined
+  const data = useCategoriesQuery()
 
-  const [isOpen, setIsOpen] = useState(false)
-
-  const handleClickTag = (value: any) => {
-    // delete
-    if (currentTag === value) {
+  const handleClickCategory = (value: string) => {
+    if (currentCategory === value) {
+      // 카테고리 제거
       router.push({
         query: {
           ...router.query,
-          tag: undefined,
+          category: undefined,
         },
       })
-    }
-    // add
-    else {
+    } else {
+      // 카테고리 설정
       router.push({
         query: {
           ...router.query,
-          tag: value,
+          category: value,
         },
       })
     }
@@ -36,27 +33,25 @@ const TagList: React.FC<Props> = () => {
 
   return (
     <StyledWrapper>
-      <div className="top" onClick={() => setIsOpen(!isOpen)}>
-        <Emoji>🏷️</Emoji> Tags ▾
+      <div className="top">
+        <Emoji>📂</Emoji> Categories
       </div>
-      {isOpen && (
-        <div className="list">
-          {Object.keys(data).map((key) => (
-            <a
-              key={key}
-              data-active={key === currentTag}
-              onClick={() => handleClickTag(key)}
-            >
-              {key}
-            </a>
-          ))}
-        </div>
-      )}
+      <div className="list">
+        {Object.keys(data).map((key) => (
+          <a
+            key={key}
+            data-active={key === currentCategory}
+            onClick={() => handleClickCategory(key)}
+          >
+            {`${key} (${data[key]})`}
+          </a>
+        ))}
+      </div>
     </StyledWrapper>
   )
 }
 
-export default TagList
+export default CategoryList
 
 const StyledWrapper = styled.div`
   .top {
@@ -67,8 +62,6 @@ const StyledWrapper = styled.div`
     @media (min-width: 1024px) {
       display: block;
     }
-
-    cursor: pointer;
   }
 
   .list {
@@ -90,11 +83,8 @@ const StyledWrapper = styled.div`
 
     a {
       display: block;
-      padding: 0.25rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
+      padding: 0.25rem 1rem;
+      margin: 0.25rem 0;
       border-radius: 0.75rem;
       font-size: 0.875rem;
       line-height: 1.25rem;
@@ -105,13 +95,10 @@ const StyledWrapper = styled.div`
       :hover {
         background-color: ${({ theme }) => theme.colors.gray4};
       }
+
       &[data-active="true"] {
         color: ${({ theme }) => theme.colors.gray12};
         background-color: ${({ theme }) => theme.colors.gray4};
-
-        :hover {
-          background-color: ${({ theme }) => theme.colors.gray4};
-        }
       }
     }
   }
