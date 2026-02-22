@@ -1,10 +1,10 @@
 import { CONFIG } from "site.config"
-import { NotionAPI } from "notion-client"
 import { idToUuid } from "notion-utils"
 
 import getAllPageIds from "src/libs/utils/notion/getAllPageIds"
 import getPageProperties from "src/libs/utils/notion/getPageProperties"
 import { TPosts } from "src/types"
+import { getNotionClient, notionGotOptions } from "./notionOptions"
 
 /**
  * @param {{ includePages: boolean }} - false: posts only / true: include pages
@@ -18,10 +18,10 @@ export const getPosts = async () => {
       "pageId is undefined. Please provide a valid Notion pageId."
     )
   }
-  const api = new NotionAPI()
+  const api = getNotionClient()
 
   id = idToUuid(id)
-  const response = await api.getPage(id)
+  const response = await api.getPage(id, { gotOptions: notionGotOptions })
   const collection = Object.values(response.collection)[0]?.value
   const block = response.block
   const schema = collection?.schema
